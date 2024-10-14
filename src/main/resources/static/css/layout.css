@@ -1,0 +1,33 @@
+html {
+position: relative;
+min-height: 100%;
+margin: 0;
+}
+
+body {
+min-height: 100%;
+}
+
+.footer {
+position: absolute;
+left: 0;
+right: 0;
+bottom: 0;
+width: 100%;
+padding: 15px 0;
+text-align: center;
+}
+
+.content {
+margin-bottom: 100px;
+margin-top: 50px;
+margin-left: 200px;
+margin-right: 200px;
+}
+
+table, th, td {
+border: 1px solid black;
+border-collapse: collapse; /* 테두리가 겹쳐지지 않도록 합니다 */
+padding: 8px; /* 셀 안의 여백을 설정합니다 (선택 사항) */
+text-align: center; /* 텍스트를 가운데 정렬합니다 (선택 사항) */
+}
