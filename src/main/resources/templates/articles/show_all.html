@@ -1,0 +1,41 @@
+new.html<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org"
+      xmlns:layout="www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<meta charset="UTF-8">
+
+<!-- 전체 적용될 css -->
+<th:block layout:fragment="css"></th:block>
+
+<!-- 전체 적용될 스크립트 -->
+<th:block layout:fragment="script"></th:block>
+
+<!-- 우리가 작업할 공간 -->
+<body>
+<div layout:fragment="content" class="content">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Title</th>
+      <th scope="col">Content</th>
+    </tr>
+    </thead>
+    <tbody>
+    <div>
+      <tr>
+        <th scope="row">1</th>
+        <td>
+          <a href="">제목111 </a>
+        </td>
+        <td>내용 1111</td>
+      </tr>
+    </div>
+    </tbody>
+  </table>
+  <a href="/articles/new">New Article</a>
+</div>
+</body>
+</html>
+
+
