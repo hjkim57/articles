@@ -1,0 +1,19 @@
+#MySql ????
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/articles
+    username: ${DB_USER}
+    password: ${DB_PW}
+  sql:
+    init:
+      mode: never
+  #always : 매번, embedded : 내장 DB만, never : 모든 동작 안함
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        show-sql: true
+        format-sql: true
