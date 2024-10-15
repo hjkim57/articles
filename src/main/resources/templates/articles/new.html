@@ -13,21 +13,29 @@
 <!-- 우리가 작업할 공간 -->
 <body>
 <div layout:fragment="content" class="content">
-  <form id="frm" class="container" action="/articles/create" method="post" >
+  <form id="frm" class="container" th:action="@{/articles/create}" method="post" th:object="${dto}">
     <div class="mb3">
       <label class="form-label">제목</label>
-      <input type="text" id="title" class="form-control" name="title">
+      <input th:field="*{title}" type="text" id="title" class="form-control" name="title">
     </div>
     <div class="mb-3">
       <label class="form-label">내용</label>
-      <textarea id="contents" class="form-control" row="3" name="content"></textarea>
+      <textarea th:field="*{content}" id="contents" class="form-control" row="3" name="content"></textarea>
     </div>
-    <input type="button" value="저장" class="btn btn-primary">
+    <input type="submit" value="저장" id="save" class="btn btn-primary">
     <input type="button" value="다시쓰기" >
     <a href="/articles">Back</a>
   </form>
 </div>
+<script th:inline="javascript">
+  $(document).ready(function(){
+    $('#save').on("click", function(){
+      $('#frm').submit();
+    })
+  })
+</script>
 </body>
 </html>
+
 
 

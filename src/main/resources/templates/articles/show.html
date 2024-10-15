@@ -23,14 +23,17 @@
         </thead>
         <tbody>
         <tr>
-            <th scope="row" >1</th>
-            <td >제목111</td>
-            <td >내용 1111</td>
+<!--            <th th:text="${article.id}" scope="row" >1</th>-->
+<!--            <td th:text="${article.title}">제목111</td>-->
+<!--            <td th:text="${article.content}">내용 1111</td>-->
+            <th th:text="${dto.id}" scope="row" >1</th>
+            <td th:text="${dto.title}">제목111</td>
+            <td th:text="${dto.content}">내용 1111</td>
         </tr>
         </tbody>
     </table>
-    <a href="" class="btn btn-primary">Edit</a>
-    <a href="" class="btn btn-danger">Delete</a>
+    <a th:href="@{/articles/{id}/update(id=${dto.id})}" class="btn btn-primary">Edit</a>
+    <a th:href="@{/articles/{id}/delete(id=${dto.id})}" class="btn btn-danger">Delete</a>
     <a href="/articles">Go to Article List</a>
     <br><br>
     <div class="card m-2">
