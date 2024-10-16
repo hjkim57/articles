@@ -56,23 +56,16 @@ public class ArticleController {
 
         ArticleDTO dto = articleService.getOneArticle(id);
         model.addAttribute("dto", dto);
-//        model.addAttribute("comments", dto.getCommentList());
-
-//        CommentDTO commentDTO = new CommentDTO();
-//        commentDTO.setArticle(ArticleDTO.fromDTO(dto));
-        model.addAttribute("commentDto", new CommentDTO());
-
         log.info("================== myId = " + id + " ==================");
-//        model.addAttribute("article", queryService.findById(id));
         return "/articles/show";
     }
 
-    @PostMapping("{id}")
-    public String createComment(@PathVariable("id")Long id, CommentDTO commentDTO) {
-        ArticleDTO dto = articleService.getOneArticle(id);
-        articleService.insertComment(id);
-        return "redirect:/articles";
-    }
+//    @PostMapping("{id}")
+//    public String createComment(@PathVariable("id")Long id, CommentDTO commentDTO) {
+//        ArticleDTO dto = articleService.getOneArticle(id);
+//        articleService.insertComment(id);
+//        return "redirect:/articles";
+//    }
 
     @GetMapping("{id}/update")
     public String viewUpdateArticle(Model model, @PathVariable("id")Long id) {
