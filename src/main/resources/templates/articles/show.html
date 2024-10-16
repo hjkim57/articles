@@ -36,41 +36,43 @@
     <a th:href="@{/articles/{id}/delete(id=${dto.id})}" class="btn btn-danger">Delete</a>
     <a href="/articles">Go to Article List</a>
     <br><br>
-    <div class="card m-2">
+    <div class="card m-2" th:each="comment : ${dto.comments}" th:object="${comment}">
         <div class="card-header">
-            <span>Featured</span>
+            <span th:text="*{nickname}">Featured</span>
             <a class="btn btn-sm btn-outline-primary">수정</a>
             <a class="btn btn-sm btn-outline-primary" id="comment-delete-btn">삭제</a>
         </div>
         <div class="card-body">
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <p class="card-text" th:text="*{body}">With supporting text below as a natural lead-in to additional content.</p>
         </div>
     </div>
 
-    <div class="card m-2">
-        <div class="card-header">
-            <span>Featured</span>
-            <a class="btn btn-sm btn-outline-primary">수정</a>
-            <a class="btn btn-sm btn-outline-primary" id="comment-delete-btn">삭제</a>
-        </div>
-        <div class="card-body">
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        </div>
-    </div>
+<!--    <div class="card m-2">-->
+<!--        <div class="card-header">-->
+<!--            <span>Featured</span>-->
+<!--            <a class="btn btn-sm btn-outline-primary">수정</a>-->
+<!--            <a class="btn btn-sm btn-outline-primary" id="comment-delete-btn">삭제</a>-->
+<!--        </div>-->
+<!--        <div class="card-body">-->
+<!--            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>-->
+<!--        </div>-->
+<!--    </div>-->
 
-    <form>
+    <form method="post" th:action="@{/articles/{id}(id=${dto.id})}" th:object="${commentDto}">
+<!--        <input type="hidden" th:field="${dto.id}">-->
         <!-- 닉네임 입력-->
         <div class="m-2">
             <label class="form-label">닉네임</label>
-            <input type="text" class="form-control" id="new-comment-nickname">
+            <input th:field="*{nickname}" type="text" class="form-control" id="new-comment-nickname">
         </div>
         <!-- 댓글 본문 입력-->
         <div class="m-2">
             <label class="form-label">댓글 내용</label>
-            <textarea type="text" class="form-control" rows="3" id="new-comment-body"></textarea>
+            <textarea th:field="*{body}" type="text" class="form-control" rows="3" id="new-comment-body"></textarea>
         </div>
         <!-- 전송버튼-->
-        <button type="button" class="btn btn-primary" id="comment-create-btn">댓글 작성</button>
+        <input type="submit" value="댓글 작성" id="save" class="btn btn-primary">
+<!--        <input type="submit" class="btn btn-primary" id="comment-create-btn" value="댓글 작성"></input>-->
     </form>
 </div>
 </body>

@@ -1,7 +1,9 @@
 package com.my.articles.controller;
 
 import com.my.articles.dto.ArticleDTO;
+import com.my.articles.dto.CommentDTO;
 import com.my.articles.entity.Article;
+import com.my.articles.entity.Comment;
 import com.my.articles.service.ArticleService;
 import com.my.articles.service.QueryService;
 import jakarta.persistence.EntityManager;
@@ -54,10 +56,22 @@ public class ArticleController {
 
         ArticleDTO dto = articleService.getOneArticle(id);
         model.addAttribute("dto", dto);
+//        model.addAttribute("comments", dto.getCommentList());
+
+//        CommentDTO commentDTO = new CommentDTO();
+//        commentDTO.setArticle(ArticleDTO.fromDTO(dto));
+        model.addAttribute("commentDto", new CommentDTO());
 
         log.info("================== myId = " + id + " ==================");
 //        model.addAttribute("article", queryService.findById(id));
         return "/articles/show";
+    }
+
+    @PostMapping("{id}")
+    public String createComment(@PathVariable("id")Long id, CommentDTO commentDTO) {
+        ArticleDTO dto = articleService.getOneArticle(id);
+        articleService.insertComment(id);
+        return "redirect:/articles";
     }
 
     @GetMapping("{id}/update")
