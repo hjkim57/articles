@@ -4,11 +4,17 @@ import com.my.articles.dto.ArticleDTO;
 import com.my.articles.dto.CommentDTO;
 import com.my.articles.entity.Article;
 import com.my.articles.entity.Comment;
+import com.my.articles.repository.ArticleRepository;
 import com.my.articles.service.ArticleService;
+import com.my.articles.service.PaginationService;
 import com.my.articles.service.QueryService;
 import jakarta.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,12 +31,32 @@ public class ArticleController {
     ArticleService articleService;
 
     @Autowired
-    QueryService queryService;
+    PaginationService paginationService;
+
+//    @Autowired
+//    QueryService queryService;
 
     @GetMapping("")
-    public String showAllArticles(Model model) {
-        List<ArticleDTO> dtoList = articleService.getAllArticle();
-        model.addAttribute("articles", dtoList);
+    public String showAllArticles(Model model,
+                                  @PageableDefault(page = 5, size = 5, sort = "id", direction = Sort.Direction.DESC)
+                                  Pageable pageable) {
+//        List<ArticleDTO> dtoList = articleService.getAllArticle();
+        Page<ArticleDTO> paging = articleService.getArticlePage(pageable);
+
+        // 페이징 정보를 확인
+        // 전체 페이지 수
+        int totalPage = paging.getTotalPages();
+        int currentPage = paging.getNumber();
+        System.out.println("totalPage = " + totalPage);
+        System.out.println("currentPage = " + currentPage);
+
+        model.addAttribute("articles", paging);
+
+        // 페이징 블록 수
+        List<Integer> barNumbers = paginationService.getPaginationBarNumber(currentPage, totalPage);
+        System.out.println("========== " + barNumbers.toString());
+        model.addAttribute("pageBars", barNumbers);
+
 //        model.addAttribute("articles", queryService.findAllArticles());
         return "/articles/show_all";
     }

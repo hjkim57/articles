@@ -1,4 +1,4 @@
-new.html<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org"
       xmlns:layout="www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/layout}">
@@ -42,6 +42,35 @@ new.html<!DOCTYPE html>
     </tbody>
   </table>
   <a href="/articles/new">New Article</a>
+
+    <nav aria-label="...">
+        <ul class="pagination">
+            <li class="page-item" th:classappend="${articles.number}<=0 ? 'disabled'">
+                <a class="page-link" th:href="@{/articles(page=${articles.number-1})}">Previous</a>
+            </li>
+
+            <th:block th:each="pageNumber : ${pageBars}">
+                <li class="page-item">
+                    <a class="page-link"
+                       th:text="${pageNumber+1}"
+                       th:href="@{/articles(page=${pageNumber})}">1</a>
+                </li>
+<!--                <li class="page-item active" aria-current="page">-->
+<!--                    <a class="page-link" href="#">2</a>-->
+<!--                </li>-->
+<!--                <li class="page-item">-->
+<!--                    <a class="page-link" href="#">3</a>-->
+<!--                </li>-->
+<!--            </th:block>-->
+            </th:block>
+            <li class="page-item"
+                th:classappend="${articles.number+1} == ${articles.totalPages} ? 'disabled'">
+                <a class="page-link" th:href="@{/articles(page=${articles.number+1})}">Next</a>
+            </li>
+
+        </ul>
+    </nav>
+
 </div>
 </body>
 </html>
